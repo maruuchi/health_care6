@@ -4,6 +4,5 @@ class GraphsController < ApplicationController
    
     gon.chart_data = [60.3, 61.1, 60.8, nil, 60.5, 61.4]
 
-    gon.weight_records = Graph.all
   end
 end
