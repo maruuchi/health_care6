@@ -1,5 +1,11 @@
 document.addEventListener('turbolinks:load', () => {
   
+  const minDate = (date1, date2) => (date1 < date2) ? date1 : date2
+  const maxDate = (date1, date2) => (date1 > date2) ? date1 : date2
+
+  // データの初日・最終日
+  const START_DATE = convertDate(gon.weight_records[0].date)
+  const END_DATE = convertDate(gon.weight_records[gon.weight_records.length - 1].date)
   
   const convertDate = (date) => new Date(new Date(date).setHours(0, 0, 0, 0))
 
@@ -73,6 +79,31 @@ document.addEventListener('turbolinks:load', () => {
     }
   }
 
+  // 引数の日付から今日までのグラフを描く関数
+  const drawGraphToToday = (from) => {
+    // データが存在する範囲に修正
+    from = maxDate(from, START_DATE)
+    let to = minDate(TODAY, END_DATE)
+    drawGraph(from, to)
+  }
+
+  // 過去◯週間のグラフを描くボタン
+  document.getElementById('a-week-button').addEventListener('click', () => {
+    drawGraphToToday(A_WEEK_AGO)
+  })
+
+  document.getElementById('two-weeks-button').addEventListener('click', () => {
+    drawGraphToToday(TWO_WEEKS_AGO)
+  })
+
+  document.getElementById('a-month-button').addEventListener('click', () => {
+    drawGraphToToday(A_MONTH_AGO)
+  })
+
+  document.getElementById('three-months-button').addEventListener('click', () => {
+    drawGraphToToday(THREE_MONTHS_AGO)
+  })
+
   // グラフの初期表示
-  drawGraph(A_WEEK_AGO, TODAY)
+  drawGraphToToday(A_WEEK_AGO)
 })
