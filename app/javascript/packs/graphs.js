@@ -7,6 +7,22 @@ document.addEventListener('turbolinks:load', () => {
   const START_DATE = convertDate(gon.weight_records[0].date)
   const END_DATE = convertDate(gon.weight_records[gon.weight_records.length - 1].date)
   
+  flatpickr.localize(flatpickr.l10ns.ja)
+
+  const periodCalendarOption = {
+    // スマートフォンでもカレンダーに「flatpickr」を使用
+    disableMobile: true,
+    // 選択できる期間を設定
+    minDate: START_DATE,
+    maxDate: END_DATE,
+    // 日付選択後のイベント
+    // onChange: （後で記述）
+  }
+
+  // カレンダー
+  const startCalendarFlatpickr = flatpickr('#start-calendar', periodCalendarOption)
+  const endCalendarFlatpickr = flatpickr('#end-calendar', periodCalendarOption)
+  
   const convertDate = (date) => new Date(new Date(date).setHours(0, 0, 0, 0))
 
   const TODAY = convertDate(new Date())
