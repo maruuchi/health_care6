@@ -1,5 +1,7 @@
 document.addEventListener('turbolinks:load', () => {
   
+  const convertDate = (date) => new Date(new Date(date).setHours(0, 0, 0, 0))
+
   const minDate = (date1, date2) => (date1 < date2) ? date1 : date2
   const maxDate = (date1, date2) => (date1 > date2) ? date1 : date2
 
@@ -35,7 +37,15 @@ document.addEventListener('turbolinks:load', () => {
   const startCalendarFlatpickr = flatpickr('#start-calendar', periodCalendarOption)
   const endCalendarFlatpickr = flatpickr('#end-calendar', periodCalendarOption)
 
-  const convertDate = (date) => new Date(new Date(date).setHours(0, 0, 0, 0))
+
+  flatpickr('#new-calendar', {
+    disableMobile: true,
+    // 記録のある日付を選択できないようにする
+    disable: gon.recorded_dates,
+    defaultDate: 'today',
+  })
+
+  
 
   const TODAY = convertDate(new Date())
   const A_WEEK_AGO = new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate() - 6)
