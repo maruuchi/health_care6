@@ -9,6 +9,17 @@ document.addEventListener('turbolinks:load', () => {
   
   flatpickr.localize(flatpickr.l10ns.ja)
 
+  const drawGraphForPeriod = () => {
+    let from = convertDate(document.getElementById('start-calendar').value)
+    let to = convertDate(document.getElementById('end-calendar').value)
+
+    if (from > to) {
+      alert('終了日は開始日以降の日付に設定して下さい')
+    } else {
+      drawGraph(from, to)
+    }
+  }
+
   const periodCalendarOption = {
     // スマートフォンでもカレンダーに「flatpickr」を使用
     disableMobile: true,
@@ -16,13 +27,14 @@ document.addEventListener('turbolinks:load', () => {
     minDate: START_DATE,
     maxDate: END_DATE,
     // 日付選択後のイベント
-    // onChange: （後で記述）
+
+    onChange: drawGraphForPeriod
   }
 
   // カレンダー
   const startCalendarFlatpickr = flatpickr('#start-calendar', periodCalendarOption)
   const endCalendarFlatpickr = flatpickr('#end-calendar', periodCalendarOption)
-  
+
   const convertDate = (date) => new Date(new Date(date).setHours(0, 0, 0, 0))
 
   const TODAY = convertDate(new Date())
@@ -101,6 +113,9 @@ document.addEventListener('turbolinks:load', () => {
     from = maxDate(from, START_DATE)
     let to = minDate(TODAY, END_DATE)
     drawGraph(from, to)
+
+      startCalendarFlatpickr.setDate(from)
+      endCalendarFlatpickr.setDate(to)
   }
 
   // 過去◯週間のグラフを描くボタン
