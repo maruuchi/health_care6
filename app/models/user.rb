@@ -6,4 +6,11 @@ class User < ApplicationRecord
 
                     # destroy時に関連づけられたモデルに対してdestroyが実行される
   has_many :graphs, dependent: :destroy
+
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      # user.confirmed_at = Time.now  # Confirmable を使用している場合は必要
+    end
+  end
 end
