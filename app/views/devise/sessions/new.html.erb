@@ -23,7 +23,8 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.submit  t('.sign_in'), class: 'btn btn-primary' %>
+    <%= f.submit  t('.sign_in'), class: 'btn btn-primary btn-block' %><br />
+    <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post, class: 'btn btn-danger btn-block' %><br />
   </div>
 <% end %>
 
