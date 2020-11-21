@@ -42,3 +42,18 @@ button.close {
 header.sticky-top nav.navbar{
   padding-left: 50px;
 }
+
+footer{
+  background-color: #343A40;
+  color: #EEEEEE;
+  width:100%;
+  height: 60px;
+  position: absolute;
+  bottom: 0;
+  display:flex;
+  justify-content: center;
+}
+
+footer p {
+  margin-top: 15px;
+}
