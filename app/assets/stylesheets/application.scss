@@ -46,20 +46,3 @@ header.sticky-top nav.navbar{
 header.sticky-top .navbar {
   padding: 5px 50px 5px 10px;
 }
-
-
-/* =========フッダー========== */
-footer{
-  background-color: #343A40;
-  color: #EEEEEE;
-  width:100%;
-  height: 60px;
-  position: absolute;
-  bottom: 0;
-  display:flex;
-  justify-content: center;
-}
-
-footer p {
-  margin-top: 15px;
-}
