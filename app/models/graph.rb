@@ -3,6 +3,7 @@ class Graph < ApplicationRecord
 
   validates :date, presence: true, uniqueness: { scope: :user_id }
   validates :weight, presence: true
+  validates :step, presence: true
 
   def self.chart_data(user)
     graphs = user.graphs.order(date: :asc)
