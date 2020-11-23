@@ -47,7 +47,25 @@ document.addEventListener('turbolinks:load', () => {
         defaultDate: 'today',
       })
 
-      
+      const editCalendar = document.getElementById('edit-calendar')
+      const editWeight = document.getElementById('edit-weight')
+      const editStep = document.getElementById('edit-step')
+
+
+      const inputWeight = () => {
+        let record = gon.weight_records.find((record) => record.date === editCalendar.value)
+        editWeight.value = record.weight
+        editStep.value = record.step
+      }
+
+      flatpickr('#edit-calendar', {
+        disableMobile: true,
+        // 記録のある日付のみ選択できるようにする
+        enable: gon.recorded_dates,
+        // 記録が無い場合は日付を選択できないようにする
+        noCalendar: gon.recorded_dates.length === 0,
+        onChange: inputWeight
+      })
 
       const TODAY = convertDate(new Date())
       const A_WEEK_AGO = new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate() - 6)
@@ -78,16 +96,37 @@ document.addEventListener('turbolinks:load', () => {
         // 体重のみのデータを作成
         let weights = records.map((record) => record.weight)
 
-        let weightData = {
+        let weightDatasets = {
+          type: 'line',
+          label: '体重(kg)',
+          data: weights,
+          // 面の表示
+          fill: false,
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1.5,
+          pointBackgroundColor: "#fff",
+          pointRadius: 3,
+          spanGaps: true,
+          yAxisID: 'y-axis-weight'
+        }
+
+        let steps = records.map((record) => record.step)
+
+        let stepDatasets = {
+          type: 'bar',
+          label: '歩数(歩)',
+          data: steps,
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1,
+          spanGaps: true,
+          yAxisID: 'y-axis-step'
+        }
+
+        let graphData = {
           labels: dates,
-          datasets: [{
-            label: '体重(kg)',
-            data: weights,
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderColor: 'rgba(255, 99, 132, 1)',
-            borderWidth: 1,
-            spanGaps: true
-          }]
+          datasets: [weightDatasets, stepDatasets]
         }
 
         let weightOption = {
@@ -101,19 +140,33 @@ document.addEventListener('turbolinks:load', () => {
                 return '体重: ' + tooltipItem.yLabel + 'kg'
               }
             }
+          },
+          scales: {
+            yAxes: [{
+              id: 'y-axis-weight',
+              position: 'left',
+            },
+            {
+              id: 'y-axis-step',
+              position: 'right',
+              gridLines: {
+                display: false,
+              },
+            }
+            ]
           }
         }
 
         if (!chartWeight) {
           // グラフが存在しないときは，作成する
           chartWeight = new Chart(chartWeightContext, {
-            type: 'line',
-            data: weightData,
+            type: 'bar',
+            data: graphData,
             options: weightOption
           })
         } else {
           // グラフが存在するときは，更新する
-          chartWeight.data = weightData
+          chartWeight.data = graphData
           chartWeight.options = weightOption
           chartWeight.update()
         }
@@ -126,8 +179,8 @@ document.addEventListener('turbolinks:load', () => {
         let to = minDate(TODAY, END_DATE)
         drawGraph(from, to)
 
-          startCalendarFlatpickr.setDate(from)
-          endCalendarFlatpickr.setDate(to)
+        startCalendarFlatpickr.setDate(from)
+        endCalendarFlatpickr.setDate(to)
       }
 
       // 過去◯週間のグラフを描くボタン
@@ -149,22 +202,6 @@ document.addEventListener('turbolinks:load', () => {
 
       // グラフの初期表示
       drawGraphToToday(A_WEEK_AGO)
-
-      const editCalendar = document.getElementById('edit-calendar')
-      const editWeight = document.getElementById('edit-weight')
-      const inputWeight = () => {
-        let record = gon.weight_records.find((record) => record.date === editCalendar.value)
-        editWeight.value = record.weight
-      }
-
-      // 記録編集用のカレンダー
-      flatpickr('#edit-calendar', {
-        disableMobile: true,
-        // 記録のある日付のみ選択できるようにする
-        enable: gon.recorded_dates,
-        // 記録が無い場合は日付を選択できないようにする
-        noCalendar: gon.recorded_dates.length === 0,
-        onChange: inputWeight
-      })
+      
   }
 })
