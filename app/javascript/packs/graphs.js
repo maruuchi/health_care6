@@ -8,8 +8,8 @@ document.addEventListener('turbolinks:load', () => {
       const maxDate = (date1, date2) => (date1 > date2) ? date1 : date2
 
       // データの初日・最終日
-      const START_DATE = convertDate(gon.weight_records[0].date)
-      const END_DATE = convertDate(gon.weight_records[gon.weight_records.length - 1].date)
+      const START_DATE = convertDate(gon.graph_records[0].date)
+      const END_DATE = convertDate(gon.graph_records[gon.graph_records.length - 1].date)
       
       flatpickr.localize(flatpickr.l10ns.ja)
 

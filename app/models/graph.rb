@@ -16,10 +16,11 @@ class Graph < ApplicationRecord
     period.map do |date|
       if graphs[index].date == date
         weight = graphs[index].weight
+        step = graphs[index].step
         index += 1
       end
       # データが存在しない日付の体重は nil とする。
-      { date: date, weight: weight }
+      { date: date, weight: weight, step: step }
     end
   end
 end
