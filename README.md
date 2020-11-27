@@ -1,24 +1,26 @@
-# README
+<h1>weight-management</h1>
+<p>体重と歩数を記録しグラフで表示してくれるアプリケーションです。</p>
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<h1>アプリ概要</h1>
+<p>体重と歩数を視覚化することで健康への意識向上を図るアプリケーションです。</p>
+<p>力仕事が要求される方々に向けて作成しました。</p>
 
-Things you may want to cover:
+<h1>使用した言語・技術</h1>
+<p>・HTML</p>
+<p>・SCSS</p>
+<p>・JavaScript</p>
+<p>・Ruby 2.6.6</p>
+<p>・Ruby on Rails 6.0.3</p>
+<p>・MySQL</p>
 
-* Ruby version
+<h1>使い方</h1>
+<p>1.左上のアカウント登録ボタンより新規アカウント登録</p>
+<p>2.「新規登録」ボタンより、体重や歩数を登録</p>
+<p>3.「記録修正」ボタンより、体重や歩数の記録を修正</p>
 
-* System dependencies
+<h1>作者</h1>
+<p>丸内　綜馬</p>
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+<h1>ライセンス</h1>
+<p>This project is licensed free.</p>
+<p>ご自由にご利用ください</p>
