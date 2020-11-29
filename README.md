@@ -19,7 +19,7 @@
 <p>3.「記録修正」ボタンより、体重や歩数の記録を修正</p>
 
 <h1>作者</h1>
-<p>丸内　綜馬</p>
+<p>丸内　綜馬:Twiiter</p>
 
 <h1>ライセンス</h1>
 <p>This project is licensed free.</p>
