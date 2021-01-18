@@ -15,7 +15,8 @@
             <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link' %>
           </li>
         <% else %>
-          <i class="fas fa-user-plus"></i>
+          <i class="fas fa-user-plus fa-xs"></i>
+          <li class="nav-item active">
             <%= link_to "新規登録", new_user_registration_path, class: 'nav-link' %>
           </li>
           <li class="nav-item active">
