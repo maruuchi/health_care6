@@ -1,6 +1,6 @@
 <header class="sticky-top">
   <nav class="navbar navbar-expand-sm navbar-dark sunny-morning-gradient">
-    <i class="fas fa-sun fa-lg"></i>
+    <i class="fas fa-sun fa-lg fa-fw"></i>
     <%= link_to "体重管理アプリ", root_path, class: 'navbar-brand' %>
     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="ナビゲーションの切替">
       <span class="navbar-toggler-icon"></span>
@@ -16,7 +16,6 @@
           </li>
         <% else %>
           <i class="fas fa-user-plus"></i>
-          <li class="nav-item active">
             <%= link_to "新規登録", new_user_registration_path, class: 'nav-link' %>
           </li>
           <li class="nav-item active">
